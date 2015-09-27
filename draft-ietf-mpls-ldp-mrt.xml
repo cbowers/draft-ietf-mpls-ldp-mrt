@@ -328,7 +328,7 @@ exist.</t>
 <t hangText="F-bit: "> The forward unknown TLV bit MUST be 0 as
 required by Section 3 of <xref target="RFC5561"/>.</t>
 
-<t hangText="MRT Capability: "> TBA-MRT-LDP-1 (To Be Allocated by
+<t hangText="MRT Capability: "> TBD-MRT-LDP-1 (To Be Allocated by
 IANA)</t>
 
 <t hangText="Length: "> The length (in octets) of TLV. Its value is
@@ -395,7 +395,7 @@ FEC refers to the LSR itself.  See <xref target="sec_egress_lsr"/> for
 more details.
 </t>
 
-<t> The value of the Rainbow MRT MPLS MT-ID (TBA-MRT-LDP-3) will be
+<t> The value of the Rainbow MRT MPLS MT-ID (TBD-MRT-LDP-3) will be
 assigned by IANA from the MPLS MT-ID space.  Prototype experiments have
 used the value 3999.</t>
 </section>
