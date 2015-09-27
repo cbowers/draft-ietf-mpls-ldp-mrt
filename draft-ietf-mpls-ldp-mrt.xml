@@ -506,28 +506,17 @@ outside of the MRT Island.  It also covers the scenario of a prefix
 being advertised by a multiple routers in the MRT Island.
 </t>
 
-<t>In the named proxy-node calculation, each multi-homed prefix is
-represented by a conceptual proxy-node which is attached to two real
-proxy-node attachment routers.  (A single proxy-node attachment router
-is allowed in the case of a prefix advertised by a same area router
-outside of the MRT Island which is singly connected to the MRT
-Island.)  All routers in the MRT Island perform the same calculations
-to determine the same two proxy-node attachment routers for each
-multi-homed prefix.  The resulting graph in the computation consists
-of the MRT Island with the proxy-node representing the multi-homed
-prefix directly attached to the two proxy-node attachment routers.
-Conceptually, one then runs the MRT algorithm on this simplified graph
-to determine the MRT-red and blue next-hops to reach the proxy-node,
-which gives the next-hops to reach the prefix.  In this manner, one
-can see that one of the two proxy-node attachment routers will always
-have a MRT-red next-hop to the proxy-node while the other will always
-have the MRT-blue next-hop to the proxy-node.  We will refer to these
-as the red and blue proxy-node attachment routers respectively.  (In
-practice, the MRT-red and blue next-hops to reach the proxy-node can
-then be determined in a more computationally efficient manner based on
-the MRT-red and blue next-hops to reach the proxy-node attachment
-routers, as described in <xref
-target="I-D.ietf-rtgwg-mrt-frr-algorithm"/>.)
+<t>In the named proxy-node calculation, each multi-homed prefix is 
+represented by a conceptual proxy-node which is attached to two real 
+proxy-node attachment routers. (A single proxy-node attachment router is 
+allowed in the case of a prefix advertised by a same area router outside 
+of the MRT Island which is singly connected to the MRT Island.) All 
+routers in the MRT Island perform the same calculations to determine the 
+same two proxy-node attachment routers for each multi-homed prefix. 
+<xref target="I-D.ietf-rtgwg-mrt-frr-algorithm"/> describes the 
+procedure for identifying one proxy-node attachment router as "red" and 
+one as "blue" with respect to the multi-homed prefix, and computing the MRT red and blue 
+next-hops to reach those red and blue proxy-node attachment routers. 
 </t>
 
 <t> In terms of LDP behavior, a red proxy-node attachment router for a
