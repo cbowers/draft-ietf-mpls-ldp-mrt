@@ -23,8 +23,6 @@
 <!ENTITY I-D.wijnands-mpls-mldp-node-protection SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.wijnands-mpls-mldp-node-protection.xml">
 ]>
 
-
-
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="no" ?>
 <?rfc toc="yes"?>
@@ -33,7 +31,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-01" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-02" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -116,7 +114,7 @@
       </address>
     </author>
 
-    <date day="4" month="July" year="2015"/>
+    <date day="27" month="September" year="2015"/>
 
     <workgroup>MPLS Working Group</workgroup>
 
@@ -515,9 +513,9 @@ routers in the MRT Island perform the same calculations to determine the
 same two proxy-node attachment routers for each multi-homed prefix. 
 <xref target="I-D.ietf-rtgwg-mrt-frr-algorithm"/> describes the 
 procedure for identifying one proxy-node attachment router as "red" and 
-one as "blue" with respect to the multi-homed prefix, and computing the MRT red and blue 
-next-hops to reach those red and blue proxy-node attachment routers. 
-</t>
+one as "blue" with respect to the multi-homed prefix, and computing the 
+MRT red and blue next-hops to reach those red and blue proxy-node 
+attachment routers. </t> 
 
 <t> In terms of LDP behavior, a red proxy-node attachment router for a
 given prefix MUST originate a label mapping for the red FEC for that
