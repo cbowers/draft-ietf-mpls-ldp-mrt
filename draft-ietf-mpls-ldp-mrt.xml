@@ -134,7 +134,7 @@
      advertising the MRT Capability.</t>
 
      <t>MRT-FRR uses LDP multi-topology extensions and requires three
-     different multi-topology IDs to be allocated from the LDP MT-ID
+     different multi-topology IDs to be allocated from the MPLS MT-ID
      space.</t>
 
     </abstract>
@@ -397,8 +397,8 @@ FEC refers to the LSR itself.  See <xref target="sec_egress_lsr"/> for
 more details.
 </t>
 
-<t> The value of the Rainbow MRT MT-ID (TBA-MRT-LDP-2) will be
-assigned by IANA from the LDP MT-ID space.  Prototype experiments have
+<t> The value of the Rainbow MRT MPLS MT-ID (TBA-MRT-LDP-3) will be
+assigned by IANA from the MPLS MT-ID space.  Prototype experiments have
 used the value 3999.</t>
 </section>
 
@@ -406,8 +406,9 @@ used the value 3999.</t>
 
 <t>To provide MRT support in LDP, the MT Prefix FEC is used.
 <xref target="I-D.ietf-rtgwg-mrt-frr-architecture"/> 
-contains the IANA request for the MRT-Red and MRT-Blue MT-IDs 
-associated with the Default MRT Profile.</t>
+defines the Default MRT Profile.  This document 
+contains the IANA request for the MRT-Red and MRT-Blue MPLS MT-IDs 
+associated with the Default MRT Profile (TBD-MRT-LDP-4 and TBD-MRT-LDP-5).</t>
 
 <t>The MT Prefix FEC encoding is defined in <xref target="RFC7307"/>
 and is used without alteration for advertising label mappings for
@@ -674,7 +675,6 @@ receive the red or blue traffic with a non-null label to correctly
 forward it.
 </t>
 
-   
 </section>
 
 <section title="Use of Rainbow FEC to satisfy label mapping existence requirements in RFC5036">
@@ -738,6 +738,7 @@ FEC MUST NOT propagate a label mapping for that Rainbow FEC.
 </section>
 
 
+
 <section title="Security Considerations">
 
 <t>The labels distributed by the extensions in this document create
@@ -756,47 +757,104 @@ paths is not unique to MRT.</t>
 
 </section>
 
+<section title="Potential restrictions on MRT-related MT-ID values 
+imposed by RFC6420">
+<t> As discussed in the introduction, in addition 
+to unicast forwarding applications, MRT can be used to provide disjoint 
+trees for multicast traffic distribution. In the case of PIM, this is 
+accomplished by using the MRT red and blue next-hops as the PIM RPF 
+topology, the collection of routes used by PIM to perform the RPF 
+operation when building source trees. The PIM Multi-Topology ID (MT-ID) 
+Join Attribute defined in section 5.2 of <xref target="RFC6420"/> can be 
+used to establish MRT-based multicast distribution trees. <xref 
+target="RFC6420"/> limits the values of the PIM MT-ID from 1 through 
+4095.</t>
+
+<t>For the purpose of reducing management overhead and simplifying 
+troubleshooting, it is desirable to be able to use the same numerical 
+value for the PIM MT-ID as for the MPLS MT-ID, for multicast and unicast 
+application using MRT routes constructed using the same MRT profile. In 
+order to enable this simplification, the MPLS MT-ID values assigned in 
+this document need to fall in the range 1 through 4095. The IANA request 
+below reflects this by requesting that the MPLS MT-ID values from 3945 
+through 3995 be used for MRT-related MPLS MT-ID values. This allows for 
+51 MRT-related MPLS MT-ID values which can be directly mapped to PIM 
+MT-ID values, which accommodates 25 MRT profiles with red and blue MT-ID 
+pairs, with one extra for the rainbow MPLS MT-ID value. <xref 
+target="RFC7307"/> designates the MPLS MT-ID range 6-3995 as 
+"Unassigned(for future IGP topologies)". The IANA request below changes 
+the guidance for MT-ID range 3948-3995 to "Unassigned (for future 
+MRT-related values)".
+</t>
+</section>
+
 <section title="IANA Considerations">
 
 <t>IANA is requested to allocate a value for the new LDP Capability
-TLV (the first free value in the range 0x0500 to 0x05FF) from the LDP
-registry "TLV Type Name Space": MRT Capability TLV (TBA-MRT-LDP-1).
+TLV (the first free value in the range 0x0500 to 0x05FF) from the 
+Label Distribution Protocol (LDP) Parameters 
+registry "TLV Type Name Space": MRT Capability TLV (TBD-MRT-LDP-1).
 </t>
 
 <figure>
 <artwork align="center"><![CDATA[
 Value          Description         Reference     Notes / Reg. Date
 -------------  ------------------  ------------  -----------------
-TBA-MRT-LDP-1  MRT Capability TLV  [This draft]  
+TBD-MRT-LDP-1  MRT Capability TLV  [This draft]  
 ]]></artwork>
 </figure>
 
 <t>IANA is requested to allocate a value for the new LDP Status Code
 (the first free value in the range 0x00000032-0x00000036) from the 
-LDP registry "Status Code Name Space": "MRT Capability negotiated 
-without MT Capability"   (TBA-MRT-LDP-3).
+Label Distribution Protocol (LDP) Parameters 
+registry "Status Code Name Space": "MRT Capability negotiated 
+without MT Capability" (TBD-MRT-LDP-2). The Status Code E-bit is
+set to 0.
 </t>
 
 <figure>
 <artwork align="center"><![CDATA[
 Value          E  Description         Reference      Notes / Reg. Date
--------------  -  ------------------  ------------   -----------------
-TBA-MRT-LDP-3  0  MRT Capability      [This draft]
+-------------- -  ------------------  ------------   -----------------
+TBD-MRT-LDP-2  0  MRT Capability      [This draft]
                   negotiated without
                   MT Capability 
 ]]></artwork>
 </figure>
 
-<t>IANA is requested to allocate a value from the MPLS Multi-Topology
-Identifiers Name Space <xref target="RFC7307"/>: Rainbow MRT MT-ID
-(TBA-MRT-LDP-2).
+<t>IANA is requested to allocate three values from the MPLS Multi-Topology
+Identifiers Registry <xref target="RFC7307"/>.
+<list>
+<t>Rainbow MRT MPLS MT-ID (TBD-MRT-LDP-3) with suggested value: 3945 </t>
+<t>Default Profile MRT-Red MPLS MT-ID (TBD-MRT-LDP-4) with suggested value: 3946 </t>
+<t>Default Profile MRT-Blue MPLS MT-ID (TBD-MRT-LDP-5) with suggested value: 3947 </t>
+</list>
+IANA is also requested to change the purpose field of the MPLS 
+Multi-Topology Identifiers Registry for MT-ID range 3948-3995 to 
+"Unassigned (for future MRT-related values)", assuming the above 
+suggested values are assigned. The Registration procedure for the entire 
+registry remains "Standards Action". The entire registry after implementing 
+the above requests is shown below.
 </t>
 
 <figure>
 <artwork align="center"><![CDATA[
-Value          Purpose             Reference
--------------  ------------------  ------------
-TBA-MRT-LDP-2  Rainbow MRT MT-ID   [This draft]  
+Value          Purpose                                    Reference
+-------------  ----------------------                     ------------
+0              Default/standard topology                  [RFC7307]
+1              IPv4 in-band management                    [RFC7307]
+2              IPv6 routing topology                      [RFC7307]
+3              IPv4 multicast topology                    [RFC7307]
+4              IPv6 multicast topology                    [RFC7307]
+5              IPv6 in-band management                    [RFC7307]
+6-3944         Unassigned (for future IGP topologies)     
+TBD-MRT-LDP-3  Rainbow MRT MPLS MT-ID                     [This draft]
+TBD-MRT-LDP-4  Default Profile MRT-Red MPLS MT-ID         [This draft]
+TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
+3948-3995      Unassigned (for future MRT-related values)
+3996-4095      Reserved for Experimental Use              [RFC7307]
+4096-65534     Unassigned (for MPLS topologies)
+65535          Wildcard Topology                          [RFC7307]
 ]]></artwork>
 </figure> 
 
@@ -823,7 +881,7 @@ TBA-MRT-LDP-2  Rainbow MRT MT-ID   [This draft]
 	
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-rtgwg-mrt-frr-architecture-05.xml"?>
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-rtgwg-mrt-frr-algorithm-05.xml"?>
-	
+	<?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6420.xml"?>
 
     </references>
 
