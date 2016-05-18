@@ -94,16 +94,16 @@
     </author>
 
    <author fullname="Jeff Tantsura" initials="J.T." surname="Tantsura">
-   <organization>Ericsson</organization>
+   <organization>Individual</organization>
    <address>
      <postal>
-       <street>300 Holger Way</street>
-       <city>San Jose</city>
-         <region>CA</region>
-         <code>95134</code>
+       <street></street>
+       <city></city>
+         <region></region>
+         <code></code>
          <country>USA</country>       
      </postal>
-     <email>jeff.tantsura@ericsson.com</email>
+     <email>jefftant.ietf@gmail.com</email>
    </address>
    </author>
 
@@ -114,7 +114,7 @@
       </address>
     </author>
 
-    <date day="27" month="September" year="2015"/>
+    <date day="18" month="May" year="2016"/>
 
     <workgroup>MPLS Working Group</workgroup>
 
@@ -734,7 +734,7 @@ routes.  The transit label swapping operations defining these
 alternative forwarding paths are created during normal operations
 (before a failure occurs).  Therefore, a malicious packet with an
 appropriate label injected into the network from a compromised
-location would be forwarded to a destinations along a non-shortest
+location would be forwarded to a destination along a non-shortest
 path.  When this technology is deployed, a network security design
 should not rely on assumptions about potentially malicious traffic
 only following shortest paths.</t>
