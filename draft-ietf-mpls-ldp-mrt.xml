@@ -381,7 +381,7 @@ target="RFC7812"/> describes the need for
 an area border router (ABR) to have different neighbors use different
 MPLS labels when sending traffic to the ABR for the same FEC. More
 detailed discussion of the Rainbow MRT MT-ID is provided in <xref
-target="sec_rainbow"/> of this document.
+target="sec_rainbow"/> of the current document.
 </t>
 
 <t>Another use for the Rainbow MRT MT-ID is for an LSR to send the
