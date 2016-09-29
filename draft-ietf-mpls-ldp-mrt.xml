@@ -15,7 +15,9 @@
 <!ENTITY RFC5715 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5715.xml">
 <!ENTITY RFC5036 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5036.xml">
 <!ENTITY RFC7307 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7307.xml">
-<!ENTITY I-D.ietf-rtgwg-mrt-frr-architecture SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtgwg-mrt-frr-architecture.xml">
+<!ENTITY RFC7811 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7811.xml">
+<!ENTITY RFC7812 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7812.xml">
+<!ENTITY RFC3209 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3209.xml">
 
 <!ENTITY I-D.atlas-rtgwg-mrt-mc-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.atlas-rtgwg-mrt-mc-arch.xml">
 <!ENTITY I-D.ietf-mpls-ldp-multi-topology SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-mpls-ldp-multi-topology.xml">
@@ -31,7 +33,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-04" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -114,7 +116,7 @@
       </address>
     </author>
 
-    <date day="18" month="May" year="2016"/>
+    <date day="29" month="September" year="2016"/>
 
     <workgroup>MPLS Working Group</workgroup>
 
@@ -144,14 +146,14 @@
       <t>This document describes the LDP signaling extension and
       associated behavior necessary to support the architecture that
       defines how IP/LDP Fast-Reroute can use MRTs <xref
-      target="I-D.ietf-rtgwg-mrt-frr-architecture"/>.  It is necessary
+      target="RFC7812"/>.  It is necessary
       to be familiar with the architecture in <xref
-      target="I-D.ietf-rtgwg-mrt-frr-architecture"/> to understand how
+      target="RFC7812"/> to understand how
       and why the LDP extensions for behavior are needed.</t>
 
       <t>At least one common standardized algorithm (e.g. the MRT
       Lowpoint algorithm explained and fully documented in <xref
-      target="I-D.ietf-rtgwg-mrt-frr-algorithm"/>) is required so that
+      target="RFC7811"/>) is required so that
       the routers supporting MRT computation consistently compute the
       same MRTs.  LDP depends on an IGP for computation of MRTs and
       alternates.  Extensions to OSPF are defined in <xref
@@ -180,7 +182,7 @@
       described here for originating and managing FECs related to MRT,
       as indicated by their multi-topology ID.  Network reconvergence
       is described in <xref
-      target="I-D.ietf-rtgwg-mrt-frr-architecture"/> and the
+      target="RFC7812"/> and the
       worst-case network convergence time can be flooded via the
       extension in Section 7 of <xref
       target="I-D.ietf-ospf-mrt"/>.</t>
@@ -206,50 +208,48 @@ target="RFC2119"/></t>
 <section title="Terminology">
 
 <t>For ease of reading, some of the terminology defined in <xref
-target="I-D.ietf-rtgwg-mrt-frr-architecture"/> is repeated here.</t>
+target="RFC7812"/> is repeated here.</t>
 
 <t><list style="hanging">
 
-     <t hangText="Redundant Trees (RT): ">A pair of trees where the
-     path from any node X to the root R along the first tree is
-     node-disjoint with the path from the same node X to the root
-     along the second tree.  These can be computed in 2-connected
-     graphs.</t>
+     <t hangText="Redundant Trees (RT): ">A pair of trees where the path from any node
+      X to the root R along the first tree is node-disjoint with the
+      path from the same node X to the root along the second tree.
+      Redundant trees can always be computed in 2-connected graphs.</t>
 
-     <t hangText="Maximally Redundant Trees (MRT): ">A pair of trees
-     where the path from any node X to the root R along the first tree
-     and the path from the same node X to the root along the second
-     tree share the minimum number of nodes and the minimum number of
-     links.  Each such shared node is a cut-vertex.  Any shared links
-     are cut-links.  Any RT is an MRT but many MRTs are not RTs.  The
-     two MRTs are referred to as MRT-Blue and MRT-Red.</t>
+     <t hangText="Maximally Redundant Trees (MRT): "> A pair of trees where the path
+      from any node X to the root R along the first tree and the path
+      from the same node X to the root along the second tree share the
+      minimum number of nodes and the minimum number of links.  Each
+      such shared node is a cut-vertex.  Any shared links are cut-links.
+      In graphs that are not 2-connected, it is not possible to compute
+      RTs.  However, it is possible to compute MRTs.  MRTs are maximally
+      redundant in the sense that they are as redundant as possible
+      given the constraints of the network graph.</t>
 
-     <t hangText="MRT-Red: "> MRT-Red is used to describe one of the
-     two MRTs; it is used to described the associated forwarding
-     topology and MT-ID.  Specifically, MRT-Red is the decreasing MRT
-     where links in the GADAG are taken in the direction from a higher
-     topologically ordered node to a lower one.</t>
+     <t hangText="MRT-Red: ">  MRT-Red is used to describe one of the two MRTs; it is
+      used to describe the associated forwarding topology and MPLS
+      Multi-Topology IDentifier (MT-ID).  Specifically, MRT-Red is the
+      decreasing MRT where links in the GADAG are taken in the direction
+      from a higher topologically ordered node to a lower one.</t>
 
-     <t hangText="MRT-Blue: "> MRT-Blue is used to describe one of the
-     two MRTs; it is used to described the associated forwarding
-     topology and MT-ID.  Specifically, MRT-Blue is the increasing MRT
-     where links in the GADAG are taken in the direction from a lower
-     topologically ordered node to a higher one.</t>
+     <t hangText="MRT-Blue: "> MRT-Blue is used to describe one of the two MRTs; it is
+      used to described the associated forwarding topology and MPLS
+      MT-ID.  Specifically, MRT-Blue is the increasing MRT where links
+      in the GADAG are taken in the direction from a lower topologically
+      ordered node to a higher one.</t>
 
-     <t hangText="Rainbow MRT MT-ID: "> It is useful to have an MT-ID
-     that refers to the multiple MRT topologies and to the default
-     topology.  This is referred to as the Rainbow MRT MT-ID and is
-     used by LDP to reduce signaling and permit the same label to
-     always be advertised to all peers for the same (MT-ID,
-     Prefix).</t>
+     <t hangText="Rainbow MRT: "> It is useful to have an MPLS MT-ID that refers to the
+      multiple MRT forwarding topologies and to the default forwarding
+      topology.  This is referred to as the Rainbow MRT MPLS MT-ID and
+      is used by LDP to reduce signaling and permit the same label to
+      always be advertised to all peers for the same (MT-ID, Prefix).</t>
      
-     <t hangText="MRT Island: "> From the computing router, the set of
-     routers that support a particular MRT profile and are connected
-     via MRT-eligible links.</t>
+     <t hangText="MRT Island: "> The set of routers that support a particular MRT
+      profile and the links connecting them that support MRT.</t>
 
-     <t hangText="Island Border Router (IBR): "> A router in the MRT
-     Island that is connected to a router not in the MRT Island and
-     both routers are in a common area or level.</t>
+     <t hangText="Island Border Router (IBR): ">  A router that is not in the MRT Island but is
+      adjacent to an IBR and in the same area/level as the IBR.</t>
      
      <t hangText="Island Neighbor (IN): "> A router that is not in the
      MRT Island but is adjacent to an IBR and in the same area/level
@@ -377,11 +377,11 @@ IPv4 only (or only for IPv6) is not supported.
 <section title="Use of the Rainbow MRT MT-ID">
 
 <t>Section 10.1 of <xref
-target="I-D.ietf-rtgwg-mrt-frr-architecture"/> describes the need for
+target="RFC7812"/> describes the need for
 an area border router (ABR) to have different neighbors use different
 MPLS labels when sending traffic to the ABR for the same FEC. More
 detailed discussion of the Rainbow MRT MT-ID is provided in <xref
-target="sec_rainbow"/>.
+target="sec_rainbow"/> of this document.
 </t>
 
 <t>Another use for the Rainbow MRT MT-ID is for an LSR to send the
@@ -403,7 +403,7 @@ used the value 3999.</t>
 <section title="MRT-Blue and MRT-Red FECs">
 
 <t>To provide MRT support in LDP, the MT Prefix FEC is used.
-<xref target="I-D.ietf-rtgwg-mrt-frr-architecture"/> 
+<xref target="RFC7812"/> 
 defines the Default MRT Profile.  This document 
 contains the IANA request for the MRT-Red and MRT-Blue MPLS MT-IDs 
 associated with the Default MRT Profile (TBD-MRT-LDP-4 and TBD-MRT-LDP-5).</t>
@@ -440,11 +440,11 @@ distribution.</t>
 <section title="MRT-specific behavior">
 <section anchor="sec_rainbow" title="ABR behavior and use of the Rainbow FEC">
 <t>Section 10.1 of <xref
-target="I-D.ietf-rtgwg-mrt-frr-architecture"/> describes the need for
+target="RFC7812"/> describes the need for
 an area border router (ABR) to have different neighbors use different
 MPLS labels when sending traffic to the ABR for the same FEC. The
 method to accomplish this using the Rainbow MRT MT-ID is described in
-detail in <xref target="I-D.ietf-rtgwg-mrt-frr-architecture"/>.  Here
+detail in <xref target="RFC7812"/>.  Here
 we provide a brief summary.  To those LDP peers in the same area as
 the best route to the destination, the ABR advertises two different
 labels corresponding to the MRT-Red and MRT-Blue forwarding trees for
@@ -496,7 +496,7 @@ blue FEC label advertisement.
 </section>
 <section anchor="sec_proxy_node" title="Proxy-node attachment router behavior">
 <t>Section 11.2 of <xref
-target="I-D.ietf-rtgwg-mrt-frr-architecture"/> describes how MRT
+target="RFC7812"/> describes how MRT
 provides FRR protection for multi-homed prefixes using calculations
 involving a named proxy-node.  This covers the scenario where a prefix
 is originated by a router in the same area as the MRT Island, but
@@ -511,7 +511,7 @@ allowed in the case of a prefix advertised by a same area router outside
 of the MRT Island which is singly connected to the MRT Island.) All 
 routers in the MRT Island perform the same calculations to determine the 
 same two proxy-node attachment routers for each multi-homed prefix. 
-<xref target="I-D.ietf-rtgwg-mrt-frr-algorithm"/> describes the 
+<xref target="RFC7811"/> describes the 
 procedure for identifying one proxy-node attachment router as "red" and 
 one as "blue" with respect to the multi-homed prefix, and computing the 
 MRT red and blue next-hops to reach those red and blue proxy-node 
@@ -729,7 +729,7 @@ FEC MUST NOT propagate a label mapping for that Rainbow FEC.
 <section title="Security Considerations">
 
 <t>The labels distributed by the extensions in this document create
-additional forwarding paths that do not following shortest path
+additional forwarding paths that do not follow shortest path
 routes.  The transit label swapping operations defining these
 alternative forwarding paths are created during normal operations
 (before a failure occurs).  Therefore, a malicious packet with an
@@ -740,7 +740,9 @@ should not rely on assumptions about potentially malicious traffic
 only following shortest paths.</t>
 
 <t>It should be noted that the creation of non-shortest forwarding
-paths is not unique to MRT.</t>
+paths is not unique to MRT.  For example, RSVP-TE <xref target="RFC3209"/>
+can be used to construct forwarding paths that do not follow the shortest path.
+</t>
 
 </section>
 
@@ -865,20 +867,21 @@ TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
     &RFC5561;
 	&RFC5036;
 	&RFC7307;
+	&RFC7811;
+	&RFC7812;
 	
-	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-rtgwg-mrt-frr-architecture-05.xml"?>
-	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-rtgwg-mrt-frr-algorithm-05.xml"?>
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6420.xml"?>
 
     </references>
 
     <references title="Informative References">
     &RFC2119;
+	&RFC3209;
 	
     &I-D.atlas-rtgwg-mrt-mc-arch;
     &I-D.wijnands-mpls-mldp-node-protection;
-	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-isis-mrt-00.xml"?>
-	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-ospf-mrt-00.xml"?>	
+	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-isis-mrt-02.xml"?>
+	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-ospf-mrt-02.xml"?>	
 
 
     </references>
