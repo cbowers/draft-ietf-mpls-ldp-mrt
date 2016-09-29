@@ -8,6 +8,12 @@ Alternatively, you can fork this repository (which creates your own copy on Gith
 You should be able generate the text version of the most recent XML commit using this URL.
 http://xml2rfc.tools.ietf.org/cgi-bin/xml2rfc.cgi?url=https://raw.githubusercontent.com/cbowers/draft-ietf-mpls-ldp-mrt/master/draft-ietf-mpls-ldp-mrt.xml&modeAsFormat=txt/ascii&type=ascii
 
+bitlified version of above URL:
+http://bit.ly/2durkGY
+
+And this should produce a diff of the most recently published ietf draft, and the latest version in the repository.
+https://tools.ietf.org/rfcdiff?url1=draft-ietf-mpls-ldp-mrt.txt&url2=http://bit.ly/2durkGY
+
 If that doesn't work, paste the raw github content URL into the xml2rfc tool at:
 http://xml2rfc.tools.ietf.org/
 
