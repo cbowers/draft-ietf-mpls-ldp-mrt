@@ -33,7 +33,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-04" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-05" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -116,7 +116,7 @@
       </address>
     </author>
 
-    <date day="29" month="September" year="2016"/>
+    <date day="17" month="February" year="2017"/>
 
     <workgroup>MPLS Working Group</workgroup>
 
@@ -130,7 +130,8 @@
 
      <t>The sole protocol extension to LDP is simply the ability to
      advertise an MRT Capability.  This document describes that
-     extension and the associated behavior expected for LSRs and LERs
+     extension and the associated behavior expected for LSRs (Label 
+	 Switching Routers) and LERs (Label Edge Routers)
      advertising the MRT Capability.</t>
 
      <t>MRT-FRR uses LDP multi-topology extensions and requires three
@@ -153,7 +154,7 @@
 
       <t>At least one common standardized algorithm (e.g. the MRT
       Lowpoint algorithm explained and fully documented in <xref
-      target="RFC7811"/>) is required so that
+      target="RFC7811"/>) is required to be deployed so that
       the routers supporting MRT computation consistently compute the
       same MRTs.  LDP depends on an IGP for computation of MRTs and
       alternates.  Extensions to OSPF are defined in <xref
@@ -162,7 +163,7 @@
 
       <t>MRT can also be used to protect multicast traffic (signalled
       via PIM or mLDP) using either global protection or local
-      protection <xref target="I-D.atlas-rtgwg-mrt-mc-arch"/>.  An MRT
+      protection as described in <xref target="I-D.atlas-rtgwg-mrt-mc-arch"/>.  An MRT
       path can be used to provide node-protection for mLDP traffic via
       the mechanisms described in <xref
       target="I-D.wijnands-mpls-mldp-node-protection"/>; an MRT path
@@ -396,16 +397,15 @@ more details.
 </t>
 
 <t> The value of the Rainbow MRT MPLS MT-ID (TBD-MRT-LDP-3) will be
-assigned by IANA from the MPLS MT-ID space.  Prototype experiments have
-used the value 3999.</t>
+assigned by IANA from the MPLS MT-ID space.</t>
 </section>
 
 <section title="MRT-Blue and MRT-Red FECs">
 
 <t>To provide MRT support in LDP, the MT Prefix FEC is used.
 <xref target="RFC7812"/> 
-defines the Default MRT Profile.  This document 
-contains the IANA request for the MRT-Red and MRT-Blue MPLS MT-IDs 
+defines the Default MRT Profile.  <xref target="sec_iana"/> of this document 
+specifies code points for the MRT-Red and MRT-Blue MPLS MT-IDs 
 associated with the Default MRT Profile (TBD-MRT-LDP-4 and TBD-MRT-LDP-5).</t>
 
 <t>The MT Prefix FEC encoding is defined in <xref target="RFC7307"/>
@@ -458,7 +458,7 @@ forwarding behavior, which is identical to normal MRT behavior.
 FEC-label binding for the Rainbow MRT MT-ID scoped FEC with the label
 corresponding to the default forwarding tree for the destination.  An
 LDP peer receiving this advertisement forwards MRT traffic to the ABR
-using this label, for both MRT Red and MRT Blue traffic.  We refer to
+using this label, for both MRT-Red and MRT-Blue traffic.  We refer to
 this as non-best-area advertising and forwarding behavior.
 </t>
 
@@ -482,7 +482,11 @@ mappings for both red and blue FECs and advertise label mappings for
 the corresponding Rainbow FEC label binding.
 </t>
 
-<t> If an LSR receives a label mapping advertisement for a rainbow FEC
+<t> In this transition, an ABR should never advertise a red(blue) 
+FEC before withdrawing the corrsponding rainbow FEC (or vice versa). 
+However, should this situation occur, the expected behavior of an LSR
+receiving these conflicting advertisements is defined as foll
+If an LSR receives a label mapping advertisement for a rainbow FEC
 from an MRT LDP peer while it still retains a label mapping for the
 corresponding red or blue FEC, the LSR MUST continue to use the label
 mapping for the red or blue FEC, and it MUST send a Label Release
@@ -524,7 +528,7 @@ prefix MUST originate a label mapping for the blue FEC for that
 prefix.  If the red(blue) proxy-node attachment router is an Island
 Border Router (IBR), then when it receives a packet with the label
 corresponding to the red(blue) FEC for a prefix, it MUST forward the
-packet to the Island Neighbor (IN) whose whose cost was used in the
+packet to the Island Neighbor (IN) whose cost was used in the
 selection of the IBR as a proxy-node attachment router.  The IBR MUST
 swap the incoming label for the outgoing label corresponding to the
 shortest path FEC for the prefix advertised by the IN.  In the case
@@ -777,7 +781,7 @@ MRT-related values)".
 </t>
 </section>
 
-<section title="IANA Considerations">
+<section anchor="sec_iana" title="IANA Considerations">
 
 <t>IANA is requested to allocate a value for the new LDP Capability
 TLV (the first free value in the range 0x0500 to 0x05FF) from the 
@@ -840,7 +844,7 @@ Value          Purpose                                    Reference
 TBD-MRT-LDP-3  Rainbow MRT MPLS MT-ID                     [This draft]
 TBD-MRT-LDP-4  Default Profile MRT-Red MPLS MT-ID         [This draft]
 TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
-3948-3995      Unassigned (for future MRT-related values)
+3948-3995      Unassigned (for future MRT-related values) [This draft]
 3996-4095      Reserved for Experimental Use              [RFC7307]
 4096-65534     Unassigned (for MPLS topologies)
 65535          Wildcard Topology                          [RFC7307]
@@ -851,8 +855,8 @@ TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
 
 <section anchor="Acknowledgements" title="Acknowledgements">
   <t>The authors would like to thank Ross Callon, Loa Andersson,
-  Stewart Bryant, Mach Chen, and Greg Mirsky for their
-  suggestions.</t>
+  Stewart Bryant, Mach Chen, Greg Mirsky, and Uma Chunduri for their
+  comments and suggestions.</t>
 
 </section>
 
