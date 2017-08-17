@@ -539,7 +539,7 @@ allowed in the case of a prefix advertised by a same area router outside
 of the MRT Island which is singly connected to the MRT Island.) All 
 routers in the MRT Island perform the same calculations to determine the 
 same two proxy-node attachment routers for each multi-homed prefix. 
-<xref target="RFC7811"/> describes the 
+Section 5.9 of <xref target="RFC7811"/> describes the 
 procedure for identifying one proxy-node attachment router as "red" and 
 one as "blue" with respect to the multi-homed prefix, and computing the 
 MRT red and blue next-hops to reach those red and blue proxy-node 
