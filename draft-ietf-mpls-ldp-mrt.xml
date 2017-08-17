@@ -209,7 +209,8 @@ target="RFC2119"/></t>
 <section title="Terminology">
 
 <t>For ease of reading, some of the terminology defined in <xref
-target="RFC7812"/> is repeated here.</t>
+target="RFC7812"/> is repeated here.  Please refer to the 
+Section 3 of <xref target="RFC7812"/> for a more complete list.</t>
 
 <t><list style="hanging">
 
