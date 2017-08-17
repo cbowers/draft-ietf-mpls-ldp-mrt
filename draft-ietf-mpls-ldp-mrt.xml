@@ -405,8 +405,17 @@ assigned by IANA from the MPLS MT-ID space.</t>
 <t>To provide MRT support in LDP, the MT Prefix FEC is used.
 <xref target="RFC7812"/> 
 defines the Default MRT Profile.  <xref target="sec_iana"/> of this document 
-specifies code points for the MRT-Red and MRT-Blue MPLS MT-IDs 
-associated with the Default MRT Profile (TBD-MRT-LDP-4 and TBD-MRT-LDP-5).</t>
+specifies the values in the MPLS Multi-Topology Identifiers Registry for 
+the MRT-Red and MRT-Blue MPLS MT-IDs associated with the Default MRT Profile 
+(TBD-MRT-LDP-4 and TBD-MRT-LDP-5).</t>
+
+<t>As described in Section 8.1 of <xref target="RFC7812"/>, 
+   when a new MRT Profile is defined, new and unique values should be
+   allocated from the "MPLS Multi-Topology Identifiers Registry",
+   corresponding to the MRT-Red and MRT-Blue MT-ID values for the new
+   MRT Profile.
+</t>
+
 
 <t>The MT Prefix FEC encoding is defined in <xref target="RFC7307"/>
 and is used without alteration for advertising label mappings for
