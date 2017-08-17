@@ -231,15 +231,11 @@ Section 3 of <xref target="RFC7812"/> for a more complete list.</t>
 
      <t hangText="MRT-Red: ">  MRT-Red is used to describe one of the two MRTs; it is
       used to describe the associated forwarding topology and MPLS
-      Multi-Topology IDentifier (MT-ID).  Specifically, MRT-Red is the
-      decreasing MRT where links in the GADAG are taken in the direction
-      from a higher topologically ordered node to a lower one.</t>
+      Multi-Topology IDentifier (MT-ID).</t>
 
      <t hangText="MRT-Blue: "> MRT-Blue is used to describe one of the two MRTs; it is
       used to described the associated forwarding topology and MPLS
-      MT-ID.  Specifically, MRT-Blue is the increasing MRT where links
-      in the GADAG are taken in the direction from a lower topologically
-      ordered node to a higher one.</t>
+      MT-ID. </t>
 
      <t hangText="Rainbow MRT: "> It is useful to have an MPLS MT-ID that refers to the
       multiple MRT forwarding topologies and to the default forwarding
