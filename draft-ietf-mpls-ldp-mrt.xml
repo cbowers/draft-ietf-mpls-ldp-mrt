@@ -33,7 +33,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-05" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-mpls-ldp-mrt-06" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3667, noModification3667, noDerivatives3667
      you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -116,7 +116,7 @@
       </address>
     </author>
 
-    <date day="17" month="February" year="2017"/>
+    <date day="17" month="August" year="2017"/>
 
     <workgroup>MPLS Working Group</workgroup>
 
