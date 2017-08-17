@@ -201,7 +201,7 @@
 
 <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in <xref
+document are to be interpreted as described in RFC 2119<xref
 target="RFC2119"/></t>
 
 </section>
@@ -868,20 +868,19 @@ TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
 
 
     <references title="Normative References">
+	&RFC2119;
     &RFC5561;
 	&RFC5036;
 	&RFC7307;
 	&RFC7811;
 	&RFC7812;
-	
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6420.xml"?>
 
     </references>
 
     <references title="Informative References">
-    &RFC2119;
+
 	&RFC3209;
-	
     &I-D.atlas-rtgwg-mrt-mc-arch;
     &I-D.wijnands-mpls-mldp-node-protection;
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-isis-mrt-02.xml"?>
