@@ -470,6 +470,16 @@ Then we provide the correct interpretation of several important
 concepts in <xref target="RFC5036"/> in the context of MRT FEC label
 distribution.</t>
 
+<t> <xref target="RFC5036"/> specifies two different 
+Label Distribution Control Modes (Independent and Ordered), 
+two different Label Retention Modes (Conservative and Liberal), 
+and two different Label Advertisement Modes (Downstream Unsolicited
+and Downstream on Demand).  The current specification for LDP MRT 
+requires that the same Label Distribution Control, Label Retention, 
+and Label Advertisement modes be used for the shortest path FECs
+and the MRT FECs.  
+</t>
+
 <section title="MRT-specific behavior">
 <section anchor="sec_rainbow" title="ABR behavior and use of the Rainbow FEC">
 <t>Section 10.1 of <xref
