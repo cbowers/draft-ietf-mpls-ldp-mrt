@@ -414,6 +414,30 @@ MRT-Blue, MRT-Red and Rainbow MRT FECs.</t>
 
 </section>
 
+<section title="Interaction of MRT-related LDP advertisements with the MRT topology and computations">
+
+<t> <xref target="RFC7811"/> and <xref target="RFC7812"/> describe how the MRT topology is 
+created based on information in IGP advertisements.  The MRT topology and computations rely on 
+on IGP advertisements.  The presence or absence of MRT-related LDP advertisements does not affect
+the MRT topology or the MRT-Red and MRT-Blue next-hops computed for that topology.</t>
+
+<t> As an example, consider a network where all nodes are running MRT IGP extensions 
+to determine the MRT-topology, which is then used to compute MRT-Red and MRT-Blue next-hops.
+The network operator also configures the nodes in this network to exchange MRT-related LDP 
+advertisements in order to distribute MPLS labels corresponding to those MRT next-hops.  
+Suppose that, due to a misconfiguration on one particular link, the MRT-related LDP advertisements
+are not being properly exchanged for that link.  Since the MRT-related IGP
+advertisements for the link are still being distributed, the link is still included in
+the MRT topology and computations,   In this scenario, there will be missing MPLS forwarding
+entries corresponding to paths that use the misconfigured link.</t>
+
+<t> Note that the situation is analogous to the interaction of normal LDP 
+advertisements and IGP advertisements for shortest path forwarding.
+Deactivating the distribution of labels for normal shortest path FECs on a link
+does not change the topology on which the SPF algorithm is run by the IGP.</t>
+
+</section>
+
 </section>
 
 <section title="LDP MRT FEC Advertisements">
