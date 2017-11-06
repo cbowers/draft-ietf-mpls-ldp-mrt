@@ -144,7 +144,7 @@
   <middle>
     <section title="Introduction">
 
-      <t>This document describes the LDP signaling extension and
+      <t>This document describes the LDP signaling extensions and
       associated behavior necessary to support the architecture that
       defines how IP/LDP Fast-Reroute can use MRTs <xref
       target="RFC7812"/>.  It is necessary
@@ -158,7 +158,7 @@
       the routers supporting MRT computation consistently compute the
       same MRTs.  LDP depends on an IGP for computation of MRTs and
       alternates.  Extensions to OSPF are defined in <xref
-      target="I-D.ietf-ospf-mrt"/>.  Extension to IS-IS are defined in
+      target="I-D.ietf-ospf-mrt"/>.  Extensions to IS-IS are defined in
       <xref target="I-D.ietf-isis-mrt"/>. </t>
 
       <t>MRT can also be used to protect multicast traffic (signalled
@@ -528,7 +528,7 @@ the corresponding Rainbow FEC label binding.
 <t> In this transition, an ABR should never advertise a red(blue) 
 FEC before withdrawing the corresponding rainbow FEC (or vice versa). 
 However, should this situation occur, the expected behavior of an LSR
-receiving these conflicting advertisements is defined as foll
+receiving these conflicting advertisements is defined as follows.
 If an LSR receives a label mapping advertisement for a rainbow FEC
 from an MRT LDP peer while it still retains a label mapping for the
 corresponding red or blue FEC, the LSR MUST continue to use the label
