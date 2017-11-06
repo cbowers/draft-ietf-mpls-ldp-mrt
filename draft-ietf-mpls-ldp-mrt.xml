@@ -453,6 +453,16 @@ advertisements and IGP advertisements for shortest path forwarding.
 Deactivating the distribution of labels for normal shortest path FECs on a link
 does not change the topology on which the SPF algorithm is run by the IGP.</t>
 
+<t> <xref target="RFC5443"/> "LDP IGP Synchronization" addresses the 
+issue of the LDP topology not matching the IGP topology by the 
+advertising the maximum IGP cost on links where LDP is not fully 
+operational. This makes the IGP topology match the LDP topology. As 
+described in Section 7.3.1 of <xref target="RFC7812"/>, MRT is designed 
+to be compatible with the LDP IGP synchronization mechanism. When the 
+IGP advertises the maximum cost on a link where LDP is not fully 
+operational, the link is excluded from MRT Island formation, which 
+prevents the MRT algorithm from creating any paths using that link. </t> 
+
 </section>
 
 </section>
@@ -460,10 +470,9 @@ does not change the topology on which the SPF algorithm is run by the IGP.</t>
 <section title="LDP MRT FEC Advertisements">
 
 <t>This sections describes how and when labels for MRT-Red and
-MRT-Blue FECs are advertised.  The associated LSPs must be created
-before a failure occurs, in order to provide protection paths which
+MRT-Blue FECs are advertised. In order to provide protection paths which
 are immediately usable by the point of local repair in the event of a
-failure.</t>
+failure, the associated LSPs need to be created before a failure occurs.</t>
 
 <t> In this section, we will use the term "shortest path FEC" to refer
 to the usual FEC associated with the shortest path destination-based
@@ -935,7 +944,8 @@ TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
     &I-D.atlas-rtgwg-mrt-mc-arch;
     &I-D.wijnands-mpls-mldp-node-protection;
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-isis-mrt-02.xml"?>
-	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-ospf-mrt-02.xml"?>	
+	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-ospf-mrt-02.xml"?>
+	<?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5443.xml"?>
 
 
     </references>
