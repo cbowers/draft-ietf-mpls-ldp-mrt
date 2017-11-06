@@ -147,10 +147,11 @@
       <t>This document describes the LDP signaling extensions and
       associated behavior necessary to support the architecture that
       defines how IP/LDP Fast-Reroute can use MRTs <xref
-      target="RFC7812"/>.  It is necessary
-      to be familiar with the architecture in <xref
-      target="RFC7812"/> to understand how
-      and why the LDP extensions for behavior are needed.</t>
+      target="RFC7812"/>. The current document provides a 
+	  brief description of the MRT-FRR architecture, focusing 
+	  on the aspects most directly related to LDP signaling.
+	  The complete description and specification of the MRT-FRR architecture 
+	  can be found in <xref target="RFC7812"/>. </t>
 
       <t>At least one common standardized algorithm (e.g., the MRT
       Lowpoint algorithm explained and fully documented in <xref
