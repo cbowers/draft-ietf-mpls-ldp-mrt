@@ -22,7 +22,6 @@
 <!ENTITY I-D.atlas-rtgwg-mrt-mc-arch SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.atlas-rtgwg-mrt-mc-arch.xml">
 <!ENTITY I-D.ietf-mpls-ldp-multi-topology SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-mpls-ldp-multi-topology.xml">
 
-<!ENTITY I-D.wijnands-mpls-mldp-node-protection SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.wijnands-mpls-mldp-node-protection.xml">
 ]>
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -167,7 +166,7 @@
       protection as described in <xref target="I-D.atlas-rtgwg-mrt-mc-arch"/>.  An MRT
       path can be used to provide node-protection for mLDP traffic via
       the mechanisms described in <xref
-      target="I-D.wijnands-mpls-mldp-node-protection"/>; an MRT path
+      target="RFC7715"/>; an MRT path
       can also be used to provide link protection for mLDP
       traffic.</t>
 
@@ -942,7 +941,7 @@ TBD-MRT-LDP-5  Default Profile MRT-Blue MPLS MT-ID        [This draft]
 
 	&RFC3209;
     &I-D.atlas-rtgwg-mrt-mc-arch;
-    &I-D.wijnands-mpls-mldp-node-protection;
+	<?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7715.xml"?>
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-isis-mrt-02.xml"?>
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-ospf-mrt-02.xml"?>
 	<?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5443.xml"?>
