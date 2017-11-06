@@ -152,7 +152,7 @@
       target="RFC7812"/> to understand how
       and why the LDP extensions for behavior are needed.</t>
 
-      <t>At least one common standardized algorithm (e.g. the MRT
+      <t>At least one common standardized algorithm (e.g., the MRT
       Lowpoint algorithm explained and fully documented in <xref
       target="RFC7811"/>) is required to be deployed so that
       the routers supporting MRT computation consistently compute the
@@ -254,10 +254,17 @@ Section 3 of <xref target="RFC7812"/> for a more complete list.</t>
      MRT Island but is adjacent to an IBR and in the same area/level
      as the IBR..</t>
      
-     
-     
-
 </list></t>
+
+<t> There are several places in this document where the construction 
+"red(blue) FEC" is used to cover the case of the red FEC and the case of the 
+blue FEC, independently. As an example, consider the sentence "When the 
+ABR requires best-area behavior for a red(blue) FEC, it MUST withdraw 
+any existing label mappings advertisements for the corresponding rainbow 
+FEC and advertise label mappings for the red(blue) FEC." This sentence 
+should be read as applying to red FECs. Then it should be read as 
+applying to blue FECs. </t> 
+
 </section>
 
 <section title="Overview of LDP Signaling Extensions for MRT">
@@ -426,7 +433,7 @@ MRT-Blue, MRT-Red and Rainbow MRT FECs.</t>
 <section title="Interaction of MRT-related LDP advertisements with the MRT topology and computations">
 
 <t> <xref target="RFC7811"/> and <xref target="RFC7812"/> describe how the MRT topology is 
-created based on information in IGP advertisements.  The MRT topology and computations rely on 
+created based on information in IGP advertisements.  The MRT topology and computations rely 
 on IGP advertisements.  The presence or absence of MRT-related LDP advertisements does not affect
 the MRT topology or the MRT-Red and MRT-Blue next-hops computed for that topology.</t>
 
@@ -437,7 +444,7 @@ advertisements in order to distribute MPLS labels corresponding to those MRT nex
 Suppose that, due to a misconfiguration on one particular link, the MRT-related LDP advertisements
 are not being properly exchanged for that link.  Since the MRT-related IGP
 advertisements for the link are still being distributed, the link is still included in
-the MRT topology and computations,   In this scenario, there will be missing MPLS forwarding
+the MRT topology and computations.   In this scenario, there will be missing MPLS forwarding
 entries corresponding to paths that use the misconfigured link.</t>
 
 <t> Note that the situation is analogous to the interaction of normal LDP 
@@ -600,7 +607,7 @@ MRT FEC label distribution.  The correct interpretation of several
 important concepts in <xref target="RFC5036"/> in the context of MRT
 FEC label distribution is provided below.</t>
 
-<section title="LDP peer in RFC5036">
+<section title="LDP peer in RFC 5036">
 <t> In the context of distributing label mappings for red and blue
 FECs, we restrict LDP peer in <xref target="RFC5036"/> to mean LDP
 peers for which the LDP MRT capability has been negotiated.  In order
@@ -610,17 +617,17 @@ capability has been negotiated.</t>
 
 </section>
 
-<section title="Next hop in RFC5036">
+<section title="Next hop in RFC 5036">
 <t> Several procedures in <xref target="RFC5036"/> use the next hop of
 a (shortest path) FEC to determine behavior.  The next hop of the
 shortest path FEC is based on the shortest path forwarding tree to the
 prefix associated with the FEC.  When the procedures of <xref
 target="RFC5036"/> are used to distribute label mapping for red and
-blue FECs, the next hop for the red/blue FEC is based on the
-MRT-Red/Blue forwarding tree to the prefix associated with the FEC.
+blue FECs, the next hop for the red(blue) FEC is based on the
+MRT-Red(Blue) forwarding tree to the prefix associated with the FEC.
 </t>
 
-<t> For example, Appendix A.1.7. of <xref target="RFC5036"/> specifies
+<t> For example, Appendix A.1.7 of <xref target="RFC5036"/> specifies
 the response by an LSR to a change in the next hop for a FEC.  For a
 shortest path FEC, the next hop may change as the result of the LSR
 running a shortest path computation on a modified IGP topology
@@ -629,7 +636,7 @@ change as the result of the LSR running a particular MRT algorithm on
 a modified IGP topology database. </t>
 
 <t> As another example, Section 2.6.1.2 of <xref target="RFC5036"/>
-specifies how that when an LSR is using LSP Ordered Control, it may
+specifies that when an LSR is using LSP Ordered Control, it may
 initiate the transmission of a label mapping only for a (shortest
 path) FEC for which it has a label mapping for the FEC next hop, or
 for which the LSR is the egress.  The FEC next hop for a shortest path
@@ -644,7 +651,7 @@ forwarding tree to the prefix associated with the FEC.</t>
 
 </section>
 
-<section anchor="sec_egress_lsr" title="Egress LSR in RFC5036">
+<section anchor="sec_egress_lsr" title="Egress LSR in RFC 5036">
 <t> Procedures in <xref target="RFC5036"/> related to Ordered Control
 label distribution mode rely on whether or not an LSR may act as an
 egress LSR for a particular FEC in order to determine whether or not
@@ -689,7 +696,7 @@ several procedures in <xref target="RFC5036"/> needs to be interpreted
 as "Is LSR egress for FEC with respect to Peer?"  </t>
 
 <t> Also note that there is no explicit condition that allows an LSR
-to be classified as an egress LSR with respect a red or blue FEC based
+to be classified as an egress LSR with respect to a red or blue FEC based
 only on the primary next-hop for the shortest path FEC not supporting
 LDP, or not supporting LDP MRT capability.  These situations are
 covered by the proxy-node attachment router and ABR conditions
@@ -711,7 +718,7 @@ forward it.
 
 </section>
 
-<section title="Use of Rainbow FEC to satisfy label mapping existence requirements in RFC5036">
+<section title="Use of Rainbow FEC to satisfy label mapping existence requirements in RFC 5036">
 <t>Several procedures in <xref target="RFC5036"/> require the LSR to
 determine if it has previously received and retained a label mapping
 for a FEC from the next hop.  In the case of an LSR that has received
@@ -794,7 +801,7 @@ can be used to construct forwarding paths that do not follow the shortest path.
 </section>
 
 <section title="Potential restrictions on MRT-related MT-ID values 
-imposed by RFC6420">
+imposed by RFC 6420">
 <t> As discussed in the introduction, in addition 
 to unicast forwarding applications, MRT can be used to provide disjoint 
 trees for multicast traffic distribution. In the case of PIM, this is 
