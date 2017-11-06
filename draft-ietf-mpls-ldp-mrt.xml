@@ -246,12 +246,15 @@ Section 3 of <xref target="RFC7812"/> for a more complete list.</t>
      <t hangText="MRT Island: "> The set of routers that support a particular MRT
       profile and the links connecting them that support MRT.</t>
 
-     <t hangText="Island Border Router (IBR): ">  A router that is not in the MRT Island but is
-      adjacent to an IBR and in the same area/level as the IBR.</t>
+     <t hangText="Island Border Router (IBR): ">   A router in the MRT Island that is
+      connected to a router not in the MRT Island, both of which are in
+      a common area or level.</t>
      
      <t hangText="Island Neighbor (IN): "> A router that is not in the
      MRT Island but is adjacent to an IBR and in the same area/level
      as the IBR..</t>
+     
+     
      
 
 </list></t>
